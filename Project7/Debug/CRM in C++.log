@@ -1,0 +1,28 @@
+﻿Build started 1/12/2016 9:03:38 PM.
+     1>Project "C:\Users\apahlavan1\Google Drive\EE 312\Projects\suleman\students\ap44342\Project7\CRM in C++.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt CustomerDB.cpp Project7.cpp main.cpp
+         main.cpp
+     1>c:\users\apahlavan1\google drive\ee 312\projects\suleman\students\ap44342\project7\string.h(50): warning C4018: '<': signed/unsigned mismatch
+     1>c:\users\apahlavan1\google drive\ee 312\projects\suleman\students\ap44342\project7\main.cpp(33): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+         c:\program files (x86)\windows kits\10\include\10.0.10150.0\ucrt\stdio.h(1193): note: see declaration of 'fscanf'
+     1>c:\users\apahlavan1\google drive\ee 312\projects\suleman\students\ap44342\project7\main.cpp(39): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+         c:\program files (x86)\windows kits\10\include\10.0.10150.0\ucrt\stdio.h(1193): note: see declaration of 'fscanf'
+     1>c:\users\apahlavan1\google drive\ee 312\projects\suleman\students\ap44342\project7\main.cpp(62): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+         c:\program files (x86)\windows kits\10\include\10.0.10150.0\ucrt\stdio.h(205): note: see declaration of 'fopen'
+         Project7.cpp
+     1>c:\users\apahlavan1\google drive\ee 312\projects\suleman\students\ap44342\project7\string.h(50): warning C4018: '<': signed/unsigned mismatch
+         CustomerDB.cpp
+     1>c:\users\apahlavan1\google drive\ee 312\projects\suleman\students\ap44342\project7\string.h(50): warning C4018: '<': signed/unsigned mismatch
+         Generating Code...
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\apahlavan1\Google Drive\EE 312\Projects\suleman\students\ap44342\Project7\Debug\CRM in C++.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"C:\Users\apahlavan1\Google Drive\EE 312\Projects\suleman\students\ap44342\Project7\Debug\CRM in C++.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\apahlavan1\Google Drive\EE 312\Projects\suleman\students\ap44342\Project7\Debug\CRM in C++.lib" /MACHINE:X86 Debug\CustomerDB.obj
+         Debug\main.obj
+         Debug\MemHeap.obj
+         Debug\Project7.obj
+         CRM in C++.vcxproj -> C:\Users\apahlavan1\Google Drive\EE 312\Projects\suleman\students\ap44342\Project7\Debug\CRM in C++.exe
+     1>Done Building Project "C:\Users\apahlavan1\Google Drive\EE 312\Projects\suleman\students\ap44342\Project7\CRM in C++.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:08.23

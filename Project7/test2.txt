@@ -1,0 +1,33 @@
+Inventory Bottles 1000
+Inventory Diapers 1000
+Inventory Rattles 1000
+Purchase John Bottles 30
+Purchase Bill Diapers 30
+Purchase Bane Rattles 30
+Purchase Santa Bottles 55
+Purchase Fran Diapers 55
+Purchase Fred Rattles 55
+Purchase John Bottles 30
+Purchase Bill Diapers 40
+Purchase Bane Rattles 50
+Summarize
+Purchase John Diapers 10
+Purchase John Diapers 10
+Purchase John Diapers 10
+Purchase John Diapers 10
+Purchase John Diapers 10
+Purchase John Diapers 10
+Purchase John Diapers 10
+Purchase John Diapers 10
+Purchase John Rattles 10
+Purchase John Rattles 10
+Purchase John Rattles 10
+Purchase John Rattles 10
+Purchase John Rattles 10
+Purchase John Rattles 10
+Purchase John Rattles 10
+Purchase John Rattles 10
+Purchase John Rattles 10
+Purchase Will Bottles 50
+Summarize
+Quit

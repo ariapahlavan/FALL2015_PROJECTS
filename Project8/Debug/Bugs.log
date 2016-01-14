@@ -1,0 +1,28 @@
+﻿Build started 1/13/2016 9:11:54 PM.
+     1>Project "C:\Users\apahlavan1\Google Drive\EE 312\Projects\suleman\students\ap44342\Project8\Bugs.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt Project8.cpp main.cpp
+         Project8.cpp
+     1>c:\users\apahlavan1\google drive\ee 312\projects\suleman\students\ap44342\project8\project8.cpp(167): error C2059: syntax error: ';'
+     1>c:\users\apahlavan1\google drive\ee 312\projects\suleman\students\ap44342\project8\project8.cpp(170): error C2059: syntax error: 'while'
+     1>c:\users\apahlavan1\google drive\ee 312\projects\suleman\students\ap44342\project8\project8.cpp(170): error C2143: syntax error: missing ';' before '{'
+     1>c:\users\apahlavan1\google drive\ee 312\projects\suleman\students\ap44342\project8\project8.cpp(170): error C2447: '{': missing function header (old-style formal list?)
+     1>c:\users\apahlavan1\google drive\ee 312\projects\suleman\students\ap44342\project8\project8.cpp(187): error C2059: syntax error: 'return'
+     1>c:\users\apahlavan1\google drive\ee 312\projects\suleman\students\ap44342\project8\project8.cpp(188): error C2059: syntax error: '}'
+     1>c:\users\apahlavan1\google drive\ee 312\projects\suleman\students\ap44342\project8\project8.cpp(188): error C2143: syntax error: missing ';' before '}'
+     1>c:\users\apahlavan1\google drive\ee 312\projects\suleman\students\ap44342\project8\project8.cpp(211): error C2143: syntax error: missing ';' before '{'
+     1>c:\users\apahlavan1\google drive\ee 312\projects\suleman\students\ap44342\project8\project8.cpp(211): error C2447: '{': missing function header (old-style formal list?)
+     1>c:\users\apahlavan1\google drive\ee 312\projects\suleman\students\ap44342\project8\project8.cpp(303): warning C4018: '<': signed/unsigned mismatch
+     1>c:\users\apahlavan1\google drive\ee 312\projects\suleman\students\ap44342\project8\project8.cpp(308): warning C4018: '<': signed/unsigned mismatch
+     1>c:\users\apahlavan1\google drive\ee 312\projects\suleman\students\ap44342\project8\project8.cpp(368): error C3861: 'moveBugs': identifier not found
+         Generating Code...
+         Compiling...
+         main.cpp
+     1>c:\users\apahlavan1\google drive\ee 312\projects\suleman\students\ap44342\project8\main.cpp(126): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+         c:\program files (x86)\windows kits\10\include\10.0.10150.0\ucrt\stdio.h(1769): note: see declaration of 'sprintf'
+         Generating Code...
+     1>Done Building Project "C:\Users\apahlavan1\Google Drive\EE 312\Projects\suleman\students\ap44342\Project8\Bugs.vcxproj" (Build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:12.25

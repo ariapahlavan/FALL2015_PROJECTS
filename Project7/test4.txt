@@ -1,0 +1,32 @@
+Inventory Bottles 100
+Inventory Rattles 50
+Inventory Diapers 200
+
+Purchase Craig Bottles 4
+Purchase Hossein Diapers 100
+
+Purchase Morteza Diapers 100
+
+Purchase Narges Diapers 50
+Purchase Banafshe Bottles 10
+
+Inventory Diapers 200
+Purchase Nasim Diapers 150
+Purchase David Rattles 60
+Purchase Nancy Diapers 20
+Purchase Sarah Bottles 8
+
+Purchase Oscar Rattles 10
+
+Purchase Janet Rattles 100
+
+
+Purchase Sam Rattles 100
+
+Purchase Kim Rattles 100
+
+Purchase Kate Rattles 100
+
+Purchase Julian Rattles 100
+Summarize
+Quit

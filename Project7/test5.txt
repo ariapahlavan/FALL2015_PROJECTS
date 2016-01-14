@@ -1,0 +1,20 @@
+Inventory Bottles 00
+Inventory Rattles 0
+Inventory Diapers 00
+
+Purchase Craig Bottles 100
+
+Purchase Nic Bottles 00
+
+Purchase Hossein Diapers 1
+
+Purchase Morteza Diapers 0
+
+Purchase Nezam Rattles 10
+Purchase Aria Rattles 0
+
+Summarize
+Quit
+
+
+
