@@ -5,7 +5,9 @@
 #ifndef _Parse_h
 #define _Parse_h 1
 
-#include <stdint.h>
+#include <cstdint>
+#include <string>
+
 enum TokenType {
 	NUMBER,//0
 	SYMBOL,//1
@@ -39,35 +41,35 @@ extern int32_t token_number_value;
  * NOTE: the token "//" is an actual token in Blip with type "SYMBOL". You must parse
  * this token and the comment that it precedes.
  */
-const char* next_token(void);
+const char* next_token();
 
 /* the skip_line function forces the input to ignore the remainder of the current line of
  * input. In ordinary usage, read_next_token() ignores spaces, tabs and line breaks. However
  * when parsing a // comment, you must ignore any token or tokens that remain on the current
  * line. The skip_line is provided for this task
  */
-void skip_line(void);
+void skip_line();
 
 /* set_input allows you to open a text file to read tokens from. By default, read_next_token
  * reads tokens from the standard input (e.g., the keyboard). The argument provided to set_input
  * must be the name of a readable file containing a valid Blip program.
  */
-void set_input(const char*);
+bool set_input(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>);
 
-/* read_next_token() is forces the Input.cpp infrastruture to advance to the next input token
+/* read_next_token() is forces the Input.cpp infrastructure to advance to the next input token
  * This function reads characters from the input source until a complete token has been read
  * (and may read additional characters as well), and forms a token from those characters.
  * read_next_token does not return a value. Programmers must use the other functions and
  * the global variables to determine which token was read and whether there was an error
  */
-void read_next_token(void);
+void read_next_token();
 
 /*
  * the peek_next_token() function returns the text of the next token without "reading" the token
  * In other words, the peek function let's you look at the next token that will be read when
  * read_next_token is called, without actually read (and removing) that token from the input
  */
-const char* peek_next_token(void);
+const char* peek_next_token();
 
 
 #endif /* _Parse_h */

@@ -4,9 +4,10 @@
 //EE 312 - Fall 2015
 
 #ifndef _ExpTree_h
-#define _ExpTree_h 1
-#include <stdlib.h>
-#include <stdio.h>
+#define _ExpTree_h
+
+#include <cstdlib>
+#include <cstdio>
 #include "String.h"
 
 
@@ -19,22 +20,19 @@ private:
 	{
 		String varName;
 		int value;
-		VariableNode* left;// left and right are pointers to our two children. 
-		VariableNode* right;// either or both of left/right can be null (i.e., equal to zero)
-		VariableNode* parent;// the parent pointer points to our parent. This pointer turns out
-							 // to be useful when we want to start traversing a tree (without recursion)
-							 // for now, I'll ignore this component
+		VariableNode* left;
+		VariableNode* right;
+
 		VariableNode() { //constructor
 			value = 0;
-			left =  right = parent = NULL;
+			left =  right = nullptr;
 			varName = "";
 		}
 	};
 
 	
 	int len;
-	String nameOfVariable;
-	VariableNode* varRoot;
+    VariableNode* varRoot;
 	/*-----------------private member functions--------------*/
 	void dstryVarTbl(VariableNode* root);
 	bool isMember(VariableNode * root, String & var);
@@ -44,35 +42,24 @@ private:
 public:
 	/*-----------Constructors and Deconstructors------------*/
 	//constructors
-	VarTable(void) {
-		varRoot = NULL;
+	VarTable() {
+		varRoot = nullptr;
 		len = 0;
 	}
 
 	//deconstructors
-	~VarTable(void) { dstryVarTbl(varRoot); }
-	/*-----------Setters and Getters------------*/
-	//setters
-	inline void setVarName(String s) { nameOfVariable = s; }
-	inline void setvar(int l) { len = l; }
-	inline void setvarRoot(VariableNode* var) { varRoot = var; }
-
-	//getters
-	inline String getVarName() { return nameOfVariable; }
-	inline int getvar() { return len; }
-	inline VariableNode* getvarRoot() { return varRoot; }
+	~VarTable() { dstryVarTbl(varRoot); }
 
 
-	//useful functions
+    //useful functions
 	void insert(String & var);
 	int& get_var_value(String& v);
-	bool isEmpty() const { return varRoot == 0; }
+	bool isEmpty() const { return varRoot == nullptr; }
 	/*
 	//shorter version of isMember
 	*/
 	bool Check_var(String& v) {
-		if (this == 0) { return false; }
-		return isMember(varRoot, v);
+		return this != nullptr && isMember(varRoot, v);
 	}
 };
 
@@ -118,8 +105,7 @@ private:
 	struct ExpNode {
 		ExpNode* left;
 		ExpNode* right;
-		ExpNode* parent;
-		BiOp op;
+        BiOp op;
 		Command cmd;
 		Comp comp;
 		int value;
@@ -130,20 +116,14 @@ private:
 			op = NOP;
 			cmd = NOCMD;
 			comp = NONE;
-			left = NULL;
-			right = NULL;
-			parent = NULL;
-			word = String("");
+			left = nullptr;
+			right = nullptr;
+            word = String("");
 		}
 	};
 
-	//member variables
 	ExpNode* expression_root;
-	int length;
-	//bool isComparison;		<------- useless 
-	//Expression*  child_list_ptr;
-	//int num_children;
-	ExpNode* insert(ExpNode* root, String& w);
+    Expression::ExpNode *insert(String &w);
 	BiOp operation_type(String & s);
 	Comp comp_type(String& s);
 	int processComp(Comp c, int x, int y);
@@ -154,38 +134,14 @@ public:
 	//constructors
 	Expression() {
 		expression_root = nullptr;
-		length = 0;
-		//child_list_ptr = NULL;
-		//num_children = 0;
 	}
-	/*Expression(ExpNode* ExpNode) {
-	expression_root = ExpNode;
-	length = 0;
-	//child_list_ptr = NULL;
-	//num_children = 0;
-	}
-	*/
-	//deconstructors
-	~Expression() {
-		//destroy(); 
-	}
-	int shortExecExp(Statements * st, VarTable& locVar);
 
-	//member functions
-	/*void destroy() {
-	delete this->expression_root; //destroy the expression
-	}*/
+    ~Expression() = default;
+
+    int shortExecExp(Statements * st, VarTable& locVar);
+
 
 	void shortInsert(String& b);
-
-
-	//void dstryExpTree(Expression * root); no need, who cares about the memory leak
-	//ExpNode * insert_string(ExpNode* root, String w);
-	//Expression * insert_command(ExpressionVec * e, Expression * c);
-	//Expression* Expression::creat_cmd(String w);
-	//Expression * insert_number(Expression* root, int v);
-
-
 };
 
 struct ExpressionVec {
@@ -194,7 +150,7 @@ struct ExpressionVec {
 	int len; // number of valid statements actually in the array
 
 
-	ExpressionVec(void) { // done, please do not edit
+	ExpressionVec() {
 		this->cap = 0;
 		this->data = nullptr;
 		this->len = 0;
@@ -216,15 +172,11 @@ struct ExpressionVec {
 		copy(that);
 	}
 
-	void destroy(void) {
+	void destroy() {
 		delete[] this->data;
 	}
 
-	int size(void) {
-		return this->len;
-	}
-
-	ExpressionVec& operator=(const ExpressionVec& that) {
+    ExpressionVec& operator=(const ExpressionVec& that) {
 		if (this != &that) {
 			destroy();
 			copy(that);
@@ -232,36 +184,13 @@ struct ExpressionVec {
 		return *this;
 	}
 
-
-	~ExpressionVec(void) { // done, please do not edit
+	~ExpressionVec() {
 		destroy();
 	}
 
-	/*
-	void ExpressionVec::clear(void) { // done, please do not edit
-	delete[] this->data;
-	this->cap = default_cap;
-	this->data = new Expression[this->cap];
-	this->len = 0;
-	}*/
-
-	Expression& operator[](int k) { // done, please do not edit
+	Expression& operator[](int k) {
 		return this->data[k];
 	}
-
-	//
-	//bool ExpressionVec::isMember(String name) { // not done, your effort goes here
-	//	assert(name != NULL); //make sure the name is not empty
-	//	for (int i = 0; i < this->len; i++)
-	//	{
-	//		if (name == this->data[i].getword()) { return true; } // if found the name, return true
-	//	}
-	//	//still no match, return false
-	//	return false;
-	//}
-	//
-
-
 };
 /*-----------------function class--------------------*/
 
@@ -272,8 +201,7 @@ private:
 		String funTxt;
 		FunctionNode* left;
 		FunctionNode* right;
-		FunctionNode* parent;
-		String param;
+        String param;
 		int index;
 		FunctionNode() { //constructor
 			funTxt = String(" ");
@@ -281,13 +209,12 @@ private:
 			param = String(" ");
 			left = nullptr;
 			right = nullptr;
-			parent = nullptr;
-		}
+        }
 	};
 	int length;
 
-	int capacity;
-	FunctionNode* root;
+    FunctionNode* root;
+
 	/*
 	//find the start of function and return the index
 	*/
@@ -309,8 +236,7 @@ public:
 	/*----------------Constructors adn Deconstructor-------------------------*/
 	FunctionExp() {
 		root = nullptr;
-		capacity = 0;
-		length = 0;
+        length = 0;
 	}
 
 	~FunctionExp() {
@@ -331,43 +257,12 @@ public:
 	/*
 	//insert a function into te vector
 	*/
-	void insert(int vectorLocation, String& funTxt, String& param) {
-		FunctionNode* child = new FunctionNode;
-		FunctionNode* parent = 0;
-		child->funTxt = funTxt;
-		child->index = vectorLocation;
-		child->param = param;
-		length += 1;
-		if (root == 0) {
-			root = child;
-			return;
-		}
-		FunctionNode* temp = root;
-		while (temp) {
-			parent = temp;
-			if (funTxt < temp->funTxt) {
-				temp = temp->left;
-			}
-			else if (funTxt > temp->funTxt) {
-				temp = temp->right;
-			}
-		}
-		if (funTxt < parent->funTxt) {
-			parent->left = child;
-		}
-		else { parent->right = child; }
-	}
+	void insert(int vectorLocation, String& funTxt, String& param);
 	
-	//shorter version of findfunc();
+	//shorter version of findfunc
 	int shortFind(String& n, String& p) {
 		return findFunc(n, p, this->root);
 	}
 };
-
-////template <typename T>
-//BiOp operation_type(String s, bool* is_Comparison);
-//Command command_type(String s);
-//bool isTextString(Expression* s);
-
 
 #endif /* _Structures_h */

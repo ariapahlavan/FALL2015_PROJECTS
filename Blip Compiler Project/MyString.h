@@ -4,8 +4,8 @@
 
 #ifndef _MYSTRING_h
 #define _MYSTRING_h
-#include <stdlib.h>
-#include <stdint.h>
+#include <cstdlib>
+#include <cstdint>
 #include "String.h"
 
 
@@ -15,7 +15,7 @@ struct StringVec {
 	uint32_t capacity;
 	String* data;
 
-	StringVec(void) {
+	StringVec() {
 		length = 0;
 		capacity = 0;
 		data = nullptr;
@@ -34,7 +34,7 @@ struct StringVec {
 	}
 
 
-	void destroy(void) {
+	void destroy() {
 		delete[] this->data;
 	}
 
@@ -42,7 +42,7 @@ struct StringVec {
 		copy(that);
 	}
 
-	~StringVec(void) {
+	~StringVec() {
 		destroy();
 	}
 
@@ -55,11 +55,11 @@ struct StringVec {
 	}
 
 	void insert(String* s) {
-		//if capacity fulll double it
+		//if capacity full double it
 		if (capacity == length) {
 			capacity *= 2;
 			if (capacity == 0) { capacity = 1; }
-			String* temp = new String[capacity * 2];
+            auto * temp = new String[capacity * 2];
 			for (uint32_t k = 0; k < length; k += 1) {
 				temp[k] = data[k];
 			}

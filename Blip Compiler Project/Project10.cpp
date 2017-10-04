@@ -2,28 +2,22 @@
 //Aria Pahlavan - ap44342
 //EE 312 - Fall 2015
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <assert.h>
+#include <cstdlib>
+#include <cstdio>
 #include "Parse.h"
 #include "Project10.h"
-#include "String.h"
-#include "ExpTree.h"
-
-
 
 
 /*
 //This function is used to parse instructions and process separately
 */
-StmntNode* Statements::prepStmnts(void){
+StmntNode* Statements::prepStmnts(){
 	read_next_token();
 	//are we done?
 	if (next_token_type == END) {
-		//break;	
-		return 0; 
+		return nullptr;
 	}
-	StmntNode* stChild = new StmntNode;
+    auto * stChild = new StmntNode;
 	if (next_token_type != SYMBOL && next_token_type != NUMBER && next_token_type != NAME) { abort(); }
 	stChild->tokenType = next_token_type; 
 	String str = next_token();
@@ -51,7 +45,7 @@ StmntNode* Statements::prepStmnts(void){
 		//if nothing after that then it's and easy output of a var or const without any expression
 		if (next_token_type == SYMBOL || next_token_type == NUMBER || next_token_type == NAME) {
 			stChild->stmntType = STEXP;
-			Expression* newExpression = new Expression;
+            auto * newExpression = new Expression;
 			newExpression->Expression::shortInsert(str);
 			stChild->expressions = newExpression;
 		}
@@ -65,7 +59,7 @@ StmntNode* Statements::prepStmnts(void){
 		read_next_token();
 		str = next_token();
 		stChild->stmntType = STEXP;
-		Expression* newExpression = new Expression;
+        auto * newExpression = new Expression;
 		newExpression->Expression::shortInsert(str);
 		stChild->expressions = newExpression;
 
@@ -74,13 +68,12 @@ StmntNode* Statements::prepStmnts(void){
 		read_next_token();
 		str = next_token();
 		stChild->stmntType = STEXP;
-		Expression* newExpression = new Expression;
+        auto * newExpression = new Expression;
 		newExpression->Expression::shortInsert(str);
 		stChild->expressions = newExpression;
 	}
 	//function: function name + parameters (param1 + param2 + .....)
 	else if (stChild->cmdType == String("defun")) {
-		//need to finish the function/////////////////////////////////////////////////////////////////
 		stChild->stmntType = STFUNC;
 		read_next_token();
 		str = next_token();
@@ -90,7 +83,7 @@ StmntNode* Statements::prepStmnts(void){
 		read_next_token();
 		str = next_token();
 		//list of parameters
-		StringVec* sVec = new StringVec;	//list of strings
+        auto * sVec = new StringVec;	//list of strings
 		//add parameters until done (smarap)
 		while (str != "smarap") {
 			String* strPtr = &str; //points to the string not a statement list
@@ -100,12 +93,11 @@ StmntNode* Statements::prepStmnts(void){
 		}
 		stChild->MultiPass = sVec;
 	}
-	//ihatereturns//
 	//if return reached end this misery
 	else if (stChild->cmdType == String("return")) {
 		stChild->stmntType = STRET;
 		read_next_token();
-		Expression* newExpression = new Expression;
+        auto * newExpression = new Expression;
 		str = next_token();
 		newExpression->Expression::shortInsert(str);
 		stChild->expressions = newExpression;
@@ -132,7 +124,8 @@ void Statements::processSet(StmntNode * s, VarTable & locVar) {
 	//send out warnings
 	//set shudn exist in tree
 	if (&locVar != &globStore && s->cmdType == "set") {
-		if (!locVar.VarTable::Check_var(s->var) && !globStore.VarTable::Check_var(s->var)) { //if trying to set a variable, does it already exist?
+		if (!locVar.VarTable::Check_var(s->var) && !globStore.VarTable::Check_var(s->var))
+        { //if trying to set a variable, does it already exist?
 			printf("variable %s not declared\n", s->var.c_str());
 			return;
 		}
@@ -163,7 +156,6 @@ void Statements::processSet(StmntNode * s, VarTable & locVar) {
 //This function is used to process the Symbols (token)
 */
 void Statements::processSymbol(String op) {
-	//talk to chirag about "##"
 	if (op == "\n" || op == "#") { printf("\n"); }
 }
 
@@ -176,21 +168,19 @@ int Statements::insert(StmntNode * s) {
 	if (this->instList->capacity == this->instList->length) {
 		instList->capacity *= 2;
 		if (instList->capacity == 0) { instList->capacity = 1; }
-		StmntNode* temp = new StmntNode[instList->capacity];
+        auto * temp = new StmntNode[instList->capacity];
 		for (int k = 0; k < instList->length; k += 1) {
 			temp[k] = instList->data[k];
 		}
 		delete[] instList->data;
 		this->instList->data = temp;
 	}
-	
 
 	//inserting the new statement node whcih has cmd and stmnt type with a variable name and expression list
 	this->instList->data[this->instList->length] = *s;
 	instList->length += 1;
 	return this->instList->length;
 }
-
 
 /*
 //This function is used to process the Do token
@@ -208,7 +198,7 @@ int Statements::processDo(VarTable & locVar, int counter) {
 	}
 	//start executing loop expressions.... or statements
 	while (loopCond->expressions->Expression::shortExecExp(this, locVar) != 0) {
-		execute(this->globStore, locVar, counter + 1, end);
+        execute(this->globStore, locVar, counter + 1, end);
 	}
 	return end;
 }
@@ -242,7 +232,7 @@ int Statements::processIf(VarTable & locVar, int counter) {
 	}
 	else {
 		if (elsecnt != 0) {
-			returnV = execute(this->globStore, locVar,elsecnt + 1, end);
+			returnV = execute(this->globStore, locVar, elsecnt + 1, end);
 		}
 	}
 	return end;
@@ -254,7 +244,7 @@ int Statements::processIf(VarTable & locVar, int counter) {
 */
 int Statements::processFunc(ExpressionVec * vec, VarTable & locVar, String & name) {
 	//will contain the locals of the functions
-	VarTable* locals = new VarTable;
+    auto * locals = new VarTable;
 	//func name
 	String p;
 	//just a string vector for the parameters (args)
@@ -287,7 +277,7 @@ int Statements::processFunc(ExpressionVec * vec, VarTable & locVar, String & nam
 		else if (next_st->cmdType == "nufed") { nufedCtr += 1; }
 	}
 	//executing functions from funcCalls
-	execute(this->globStore, local, index_v + 1, lim);
+    execute(this->globStore, local, index_v + 1, lim);
 	if (contCaller == control) {
 		contCaller -= 1;
 		returnV = 0;
@@ -296,22 +286,16 @@ int Statements::processFunc(ExpressionVec * vec, VarTable & locVar, String & nam
 	return returnV;
 }
 
-/*b------------------build, run and execute------------------*/
-
+/*------------------build, run and execute------------------*/
 /*
 //This function is used to Run, process and load the tokens with their
 // parameters, then execute the sentences (by calling execute function)
 */
-void Statements::run() {
+Statements & Statements::build() {
 	StmntNode* temp;
 	//create new statement
-	Vector* child = new Vector;
+    auto * child = new Vector;
 	this->instList = child;
-	/*while (next_token_type == END) {
-		buildStatement(&(prog->statements[k]));
-		k++;
-		prog->len++;
-	}*/
 	do {
 		temp = prepStmnts();
 		if (temp) {//inserting new bubble into database
@@ -320,14 +304,14 @@ void Statements::run() {
 	} while (temp);
 
 	contCaller = 0;
-	Statements::execute(this->globStore, this->globStore, 0, this->instList->length);
+//    run(this->globStore, this->globStore, 0, this->instList->length);
+    return *this;
 }
-
 
 /*
 //This function is used to process and execute the saved sentences in the database
 */
-int Statements::execute(VarTable & globVar, VarTable & locVar, int begBlock, int endBlock) {
+int Statements::execute(VarTable &globVar, VarTable &locVar, int begBlock, int endBlock) {
 	//create a temporary statement
 	StmntNode* next_st;
 	int k = begBlock, control = contCaller;
@@ -375,6 +359,8 @@ int Statements::execute(VarTable & globVar, VarTable & locVar, int begBlock, int
 	return k;
 }
 
-
+void Statements::run() {
+        execute(this->globStore, this->globStore, 0, this->instList->length);
+}
 
 //End of file.

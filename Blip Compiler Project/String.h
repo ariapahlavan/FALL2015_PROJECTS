@@ -4,8 +4,8 @@
 
 #ifndef _String_h
 #define _String_h
-#include <stdlib.h>
-#include <stdint.h>
+#include <cstdlib>
+#include <cstdint>
 
 struct String {
 private:
@@ -15,10 +15,10 @@ private:
 public:
 	String(const char* src) { construct(src); }
 
-	String(void) { construct(""); }
+	String() { construct(""); }
 
 	String(const String& that) { copy(that); }
-	~String(void) { destroy(); }
+	~String() { destroy(); }
 	String& operator=(const String& that) {
 		if (this != &that) { 
 			destroy();
@@ -42,9 +42,9 @@ public:
 	 *   printf("Customer with name %s  has purchased %d bottles\n", 
 	 *			    myCustomer.name.c_str(), myCustomer.bottles);
 	 */
-	const char* c_str(void) const { return ptr; }
+	const char* c_str() const { return ptr; }
 
-	uint32_t size(void) const { return len; }
+	uint32_t size() const { return len; }
 
 	bool operator==(String s2) const {
 		const String& s1 = *this;
@@ -68,10 +68,10 @@ public:
 	}
 
 
-	bool operator!=(String s2) const { const String& s1 = *this; return !(s1 == s2); }
-	bool operator>(String s2) const { const String& s1 = *this; return s2 < s1; }
-	bool operator<=(String s2) const { const String& s1 = *this; return ! (s2 < s1); }
-	bool operator>=(String s2) const { const String& s1 = *this; return ! (s1 < s2); }
+	bool operator!=(const String &s2) const { const String& s1 = *this; return !(s1 == s2); }
+	bool operator>(const String &s2) const { const String& s1 = *this; return s2 < s1; }
+	bool operator<=(const String &s2) const { const String& s1 = *this; return ! (s2 < s1); }
+	bool operator>=(const String &s2) const { const String& s1 = *this; return ! (s1 < s2); }
 
 private:
 	/* for internal use only, clients really shouldn't be calling these functions
@@ -108,12 +108,9 @@ private:
 
 	/* destroy(void) is my "real" destructor. I always name this function destroy and my official destructor is always
 	 * just a simple one-line call to this function */
-	void destroy(void) {
+	void destroy() {
 		free(ptr);
 	}
 };
-
-
-	
 
 #endif /* _String_h */

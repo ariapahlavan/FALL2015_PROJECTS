@@ -5,9 +5,9 @@
 #ifndef Project10_H
 #define Project10_H
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <stdint.h>
+#include <cstdlib>
+#include <cstdio>
+#include <cstdint>
 #include "String.h"
 #include "ExpTree.h"
 #include "Parse.h"
@@ -30,7 +30,6 @@ struct StmntNode {
 	String text;
 	String var;
 	Expression* expressions;
-	int data;
 	//for functions
 	String Param;
 	StringVec* MultiPass;
@@ -40,15 +39,10 @@ struct StmntNode {
 		text = String(" ");
 		var = String(" ");
 		stmntType = NOST;
-		expressions = 0;
-		data = 0;
+		expressions = nullptr;
 	}
-	~StmntNode() {
-		//delete this->MultiPass;
-		//delete this->expressions;
-	}
+	~StmntNode() = default;
 };
-
 
 class Statements {
 private:
@@ -77,11 +71,11 @@ private:
 				this->data[k] = x.data[k];
 			}
 		}
-		void destroy(void) {
+		void destroy() {
 			delete[] this->data;
 		}
 		//Constructor
-		Vector(void) {
+		Vector() {
 			length = 0;
 			capacity = 0;
 			data = nullptr;
@@ -91,29 +85,25 @@ private:
 			copy(that);
 		}
 		//Deconstructor
-		~Vector(void) {
+		~Vector() {
 			destroy();
 		}
 
 	};
 
 	Vector* instList;
-	int returnV;		//return value is not consistant..... Pssshhhh 
+	int returnV;
 	int contCaller;		//counting calls to functions in memHeap
-	FunctionExp functStore;		//Updated for storying functions
+	FunctionExp functStore;		//Updated for storing functions
 
 							/*------------------Processing Mem Functions--------------------*/
-							//keeping these outside the class was a huge mistake
-							//A HUGE MISTAKE
-	StmntNode* prepStmnts(void);
+	StmntNode* prepStmnts();
 	void processOut(StmntNode* s, VarTable& locVar);
-	//void processVar(StmntNode* s, VarTable& locVar);
 	void processSet(StmntNode* s, VarTable& locVar);
 	void processSymbol(String op);
 	int insert(StmntNode* s);
 	int processDo(VarTable& locVar, int counter);
 	int processIf(VarTable& locVar, int counter);
-	//int processFunc(ExpressionVec* vec, VarTable& locVar, String& name);	//wwhy can't be private? pshhhhhhhhhhhhhhhhhh.... 
 
 public:
 	VarTable globStore;
@@ -121,15 +111,11 @@ public:
 	int processFunc(ExpressionVec* vec, VarTable& locVar, String& name);	//adding local and global variables
 																			//build, execute and run:
 	//void build(void);
-	int execute(VarTable& globVar, VarTable& locVar, int begBlock, int endBlock);
-	void run(void);
+	Statements & build();
 
+	void run();
 
+	int execute(VarTable &globVar, VarTable &locVar, int begBlock, int endBlock);
 };
-
-
-
-
-
 
 #endif

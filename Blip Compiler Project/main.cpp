@@ -2,27 +2,37 @@
 //Aria Pahlavan - ap44342
 //EE 312 - Fall 2015
 
-#include <stdlib.h>
+#include <iostream>
 #include "Project10.h"
-#include <stdio.h>
-#include "Parse.h"
+
+using namespace std;
 
 
 //New instruction template
-Statements database;
+Statements *programLoader = nullptr;
+Statements program;
 
+bool initTest(int testNum);
 
 int main() {
-	/*
-	//select your file and run..... BAAM!
-	*/
+    for (int i = 1; i < 10; ++i) {
+        if (initTest(i)) {
+            program.build().run();
+        }
 
-	set_input("test1.blip");
-	database.run();
-
-	system("pause");
+        cout << "-----------------------" << endl;
+    }
 
 	return 0;
+}
+
+bool initTest(int testNum){
+    delete programLoader;
+    programLoader = new Statements();
+    program = *programLoader;
+
+    auto input = string("../test" + to_string(testNum) +".blip");
+    return set_input(input);
 }
 
 //End of file.

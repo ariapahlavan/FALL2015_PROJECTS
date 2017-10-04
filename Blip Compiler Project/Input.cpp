@@ -3,9 +3,9 @@
 //EE 312 - Fall 2015
 
 #define _CRT_SECURE_NO_WARNINGS
-#include <stdio.h>
-#include <stdlib.h>
-#include <assert.h>
+#include <cstdio>
+#include <cstdlib>
+#include <string>
 #include "Parse.h"
 
 
@@ -20,15 +20,17 @@ static uint32_t cursor = 0;
 static const uint32_t token_max_size = 128;
 static char token[token_max_size];
 
-void set_input(const char* file_name) {
-	FILE* p = fopen(file_name, "r");
+bool set_input(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>> file_name) {
+	FILE* p = fopen(file_name.c_str(), "r");
 	if (!p) {
-		fprintf(stderr, "sorry, I coulnd't open the file %s for reading\n", file_name);
-		return;
+		fprintf(stderr, "sorry, I coulnd't open the file %s for reading\n", file_name.c_str());
+		return false;
 	}
 	input_source = p;
 	cursor = 0;
 	buff[0] = 0;
+
+	return true;
 }
 
 void skip_line(void) {
